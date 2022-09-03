@@ -1,16 +1,22 @@
+import styled from "styled-components";
+
+const Link = styled("a")`
+  background-color: red;
+`;
+
 export default function Index() {
   return (
     <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }}>
       <h1>Welcome to Remix</h1>
       <ul>
         <li>
-          <a
+          <Link
             target="_blank"
             href="https://remix.run/tutorials/blog"
             rel="noreferrer"
           >
             15m Quickstart Blog Tutorial
-          </a>
+          </Link>
         </li>
         <li>
           <a
