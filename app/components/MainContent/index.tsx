@@ -1,6 +1,6 @@
-import MainContentHeader from "../MainContentHeader";
-import ShoeGrid from "../ShoeGrid";
-import Sidebar from "../Sidebar";
+import MainContentHeader from "~/components/MainContentHeader";
+import ShoeGrid from "~/components/ShoeGrid";
+import Sidebar from "~/components/Sidebar";
 
 const MainContent: React.FC = () => {
   return (
