@@ -1,4 +1,3 @@
-import { PassThrough } from "stream";
 import type { EntryContext } from "@remix-run/node";
 import { Response } from "@remix-run/node";
 import { RemixServer } from "@remix-run/react";
@@ -13,15 +12,23 @@ export default function handleRequest(
 ) {
   const sheet = new ServerStyleSheet();
 
-  let markup = renderToString(
-    sheet.collectStyles(
-      <RemixServer context={remixContext} url={request.url} />
-    )
-  );
-  const styles = sheet.getStyleTags();
+  let markup: string = "";
+  let styles: string = "";
+
+  try {
+    markup = renderToString(
+      sheet.collectStyles(
+        <RemixServer context={remixContext} url={request.url} />
+      )
+    );
+    styles = sheet.getStyleTags();
+  } catch (error) {
+    console.log(error);
+  } finally {
+    sheet.seal();
+  }
 
   markup = markup.replace("__STYLES__", styles);
-
   responseHeaders.set("Content-Type", "text/html");
 
   return new Response("<!DOCTYPE html>" + markup, {
