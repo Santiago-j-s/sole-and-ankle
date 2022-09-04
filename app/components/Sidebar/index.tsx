@@ -1,5 +1,5 @@
 import { Link, useLoaderData } from "@remix-run/react";
-import type { loader } from "~/routes/sale/$shoetype";
+import type { loader } from "~/routes/sales/shoes.$shoetype";
 
 const Sidebar: React.FC = () => {
   const { shoetypes } = useLoaderData<typeof loader>();
