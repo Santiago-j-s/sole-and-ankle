@@ -8,6 +8,8 @@ const Label = styled.label`
 `;
 
 const SearchInput = styled.input`
+  width: 175px;
+
   appearance: none;
 
   background-color: transparent;
