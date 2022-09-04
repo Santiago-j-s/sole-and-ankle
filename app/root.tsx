@@ -1,4 +1,5 @@
 import type { LinksFunction, MetaFunction } from "@remix-run/node";
+import { json } from "@remix-run/node";
 import {
   Links,
   LiveReload,
@@ -9,6 +10,7 @@ import {
 import GlobalStyles from "~/components/GlobalStyles";
 import GlobalVariables from "~/components/GlobalVariables";
 import MainLayout from "~/components/MainLayout";
+import sales from "~/data/sales";
 import fonts from "~/styles/fonts.css";
 
 export const meta: MetaFunction = () => ({
@@ -20,6 +22,10 @@ export const meta: MetaFunction = () => ({
 export const links: LinksFunction = () => {
   return [{ rel: "stylesheet", href: fonts }];
 };
+
+export function loader() {
+  return json({ sales });
+}
 
 export default function App() {
   return (

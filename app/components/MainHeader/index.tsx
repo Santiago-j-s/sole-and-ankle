@@ -1,6 +1,7 @@
-import { NavLink } from "@remix-run/react";
+import { NavLink, useLoaderData } from "@remix-run/react";
 import styled from "styled-components";
 import Logo from "~/components/Logo";
+import type { loader } from "~/root";
 
 const Wrapper = styled.div`
   display: flex;
@@ -47,40 +48,19 @@ const Link = styled(NavLink)`
 `;
 
 const MainHeader: React.FC = () => {
+  const { sales } = useLoaderData<typeof loader>();
+
   return (
     <Wrapper>
       <HeaderLogo>Sole&Ankle</HeaderLogo>
       <NavLinks>
-        <li>
-          <Link to="/sale/shoes" prefetch="intent">
-            Sale
-          </Link>
-        </li>
-        <li>
-          <Link to="/new-releases" prefetch="intent">
-            New releases
-          </Link>
-        </li>
-        <li>
-          <Link to="/men" prefetch="intent">
-            Men
-          </Link>
-        </li>
-        <li>
-          <Link to="/women" prefetch="intent">
-            Women
-          </Link>
-        </li>
-        <li>
-          <Link to="/kids" prefetch="intent">
-            Kids
-          </Link>
-        </li>
-        <li>
-          <Link to="/collections" prefetch="intent">
-            Collections
-          </Link>
-        </li>
+        {sales.map((sale) => (
+          <li key={sale.slug}>
+            <Link to={sale.slug} prefetch="intent">
+              {sale.text}
+            </Link>
+          </li>
+        ))}
       </NavLinks>
     </Wrapper>
   );
