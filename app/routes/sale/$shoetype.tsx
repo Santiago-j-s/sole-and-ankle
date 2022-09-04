@@ -1,13 +1,11 @@
-import type { LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import MainContent from "~/components/MainContent";
 import shoes from "~/data/shoes";
+import shoetypes from "~/data/shoetypes";
 
-export const loader: LoaderFunction = () => {
-  return json(shoes);
-};
-
-export type Shoes = typeof loader;
+export function loader() {
+  return json({ shoes, shoetypes });
+}
 
 export default function Type() {
   return <MainContent />;

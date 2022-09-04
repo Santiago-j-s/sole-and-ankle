@@ -1,12 +1,13 @@
 import { useLoaderData } from "@remix-run/react";
 import { useEffect } from "react";
-import type { Shoes } from "~/routes/sale/$type";
+import type { loader } from "~/routes/sale/$shoetype";
 
 const ShoeGrid: React.FC = () => {
-  const shoes: Shoes = useLoaderData();
+  const { shoes } = useLoaderData<typeof loader>();
+
   useEffect(() => {
     console.log(shoes);
-  }, []);
+  }, [shoes]);
 
   return <div></div>;
 };

@@ -1,0 +1,15 @@
+export default [
+  { slug: "lifestyle", text: "Lifestyle" },
+  { slug: "jordan", text: "Jordan" },
+  { slug: "running", text: "Running" },
+  { slug: "basketball", text: "Basketball" },
+  { slug: "training-gym", text: "Training & Gym" },
+  { slug: "football", text: "Football" },
+  { slug: "skateboarding", text: "Skateboarding" },
+  { slug: "american-football", text: "American Football" },
+  { slug: "baseball", text: "Baseball" },
+  { slug: "golf", text: "Golf" },
+  { slug: "tennis", text: "Tennis" },
+  { slug: "athletics", text: "Athletics" },
+  { slug: "walking", text: "Walking" },
+];
