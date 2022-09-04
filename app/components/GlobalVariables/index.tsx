@@ -16,6 +16,8 @@ const GlobalVariables = createGlobalStyle`
   --font-weight-normal: 500;
   --font-weight-medium: 600;
   --font-weight-bold: 800;
+
+  --site-padding: 32px;
  }
 `;
 
