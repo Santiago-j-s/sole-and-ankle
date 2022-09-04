@@ -23,6 +23,10 @@ export const links: LinksFunction = () => {
   return [{ rel: "stylesheet", href: fonts }];
 };
 
+export const handle = {
+  breadcrumb: "home",
+};
+
 export function loader() {
   return json({ sales });
 }

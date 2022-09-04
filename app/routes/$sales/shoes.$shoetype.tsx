@@ -3,6 +3,10 @@ import MainContent from "~/components/MainContent";
 import shoes from "~/data/shoes";
 import shoetypes from "~/data/shoetypes";
 
+export const handle = {
+  breadcrumb: "shoes",
+};
+
 export function loader() {
   return json({ shoes, shoetypes });
 }

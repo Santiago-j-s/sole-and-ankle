@@ -1,5 +1,6 @@
-import { NavLink } from "@remix-run/react";
+import { useMatches } from "@remix-run/react";
 import styled from "styled-components";
+import BreadCrumbs, { Crumb } from "~/components/BreadCrumbs";
 import ShoeGrid from "~/components/ShoeGrid";
 import Sidebar from "~/components/Sidebar";
 
@@ -22,11 +23,14 @@ const RightColumn = styled.div`
   order: 2;
 `;
 
-const BreadCrumbs = styled.nav`
-  outline: 1px solid red;
-`;
-
 const MainContent: React.FC = () => {
+  const matches = useMatches();
+
+  const crumbs = matches.map((match) => ({
+    to: match.pathname,
+    text: match.handle?.breadcrumb,
+  }));
+
   return (
     <Wrapper>
       <RightColumn>
@@ -35,11 +39,11 @@ const MainContent: React.FC = () => {
       </RightColumn>
       <LeftColumn>
         <BreadCrumbs>
-          <ul>
-            <li>
-              <NavLink to="/lifestyle">Home / Sale / Shoes</NavLink>
-            </li>
-          </ul>
+          {crumbs.map((crumb) => (
+            <Crumb key={crumb.to} to={crumb.to}>
+              {crumb.text}
+            </Crumb>
+          ))}
         </BreadCrumbs>
         <Sidebar />
       </LeftColumn>
