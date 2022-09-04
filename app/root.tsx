@@ -3,13 +3,13 @@ import {
   Links,
   LiveReload,
   Meta,
-  Outlet,
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
-import GlobalStyles from "./components/GlobalStyles";
-import GlobalVariables from "./components/GlobalVariables";
-import fonts from "./styles/fonts.css";
+import GlobalStyles from "~/components/GlobalStyles";
+import GlobalVariables from "~/components/GlobalVariables";
+import MainLayout from "~/components/MainLayout";
+import fonts from "~/styles/fonts.css";
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
@@ -32,7 +32,7 @@ export default function App() {
       <body>
         <GlobalStyles />
         <GlobalVariables />
-        <Outlet />
+        <MainLayout />
         <ScrollRestoration />
         <Scripts />
         <LiveReload />

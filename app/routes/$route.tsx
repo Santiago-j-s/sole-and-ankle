@@ -1,11 +1,9 @@
-import Header from "~/components/Header";
-import MainContent from "~/components/MainContent";
+import { Outlet } from "@remix-run/react";
 
 export default function Route() {
   return (
     <div>
-      <Header />
-      <MainContent />
+      <Outlet />
     </div>
   );
 }

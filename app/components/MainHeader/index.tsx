@@ -52,7 +52,7 @@ const MainHeader: React.FC = () => {
       <HeaderLogo>Sole&Ankle</HeaderLogo>
       <NavLinks>
         <li>
-          <Link to="/sale" prefetch="intent">
+          <Link to="/sale/shoes" prefetch="intent">
             Sale
           </Link>
         </li>
