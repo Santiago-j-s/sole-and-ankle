@@ -14,6 +14,7 @@ const SidebarLink = styled(NavLink)`
   text-decoration: none;
 
   line-height: 30px;
+  font-weight: var(--font-weigth-medium);
 
   &.active {
     color: var(--primary);
