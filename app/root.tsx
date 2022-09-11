@@ -7,6 +7,7 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
+import type { PropsWithChildren } from "react";
 import GlobalStyles from "~/components/GlobalStyles";
 import GlobalVariables from "~/components/GlobalVariables";
 import MainLayout from "~/components/MainLayout";
@@ -31,22 +32,29 @@ export function loader() {
   return json({ sales });
 }
 
-export default function App() {
+function Document({ children }: PropsWithChildren<{}>) {
   return (
     <html lang="en">
       <head>
         <Meta />
         <Links />
-        {typeof document === "undefined" ? "__STYLES__" : null}
       </head>
       <body>
         <GlobalStyles />
         <GlobalVariables />
-        <MainLayout />
+        {children}
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
       </body>
     </html>
+  );
+}
+
+export default function App() {
+  return (
+    <Document>
+      <MainLayout />
+    </Document>
   );
 }

@@ -2,7 +2,21 @@ import type { EntryContext } from "@remix-run/node";
 import { Response } from "@remix-run/node";
 import { RemixServer } from "@remix-run/react";
 import { renderToString } from "react-dom/server";
-import { ServerStyleSheet } from "styled-components";
+import { ServerStyleSheet, StyleSheetManager } from "styled-components";
+
+function getStyles(sheet: ServerStyleSheet) {
+  let styles: string = "";
+
+  try {
+    styles = sheet.instance.toString();
+  } catch (error) {
+    console.log(error);
+  } finally {
+    sheet.seal();
+  }
+
+  return { styles };
+}
 
 export default function handleRequest(
   request: Request,
@@ -12,23 +26,16 @@ export default function handleRequest(
 ) {
   const sheet = new ServerStyleSheet();
 
-  let markup: string = "";
-  let styles: string = "";
+  let markup = renderToString(
+    <StyleSheetManager sheet={sheet.instance}>
+      <RemixServer context={remixContext} url={request.url} />
+    </StyleSheetManager>
+  );
 
-  try {
-    markup = renderToString(
-      sheet.collectStyles(
-        <RemixServer context={remixContext} url={request.url} />
-      )
-    );
-    styles = sheet.getStyleTags();
-  } catch (error) {
-    console.log(error);
-  } finally {
-    sheet.seal();
-  }
+  const { styles } = getStyles(sheet);
 
-  markup = markup.replace("__STYLES__", styles);
+  markup = markup.replace("</head>", `<style>${styles}</style></head>`);
+
   responseHeaders.set("Content-Type", "text/html");
 
   return new Response("<!DOCTYPE html>" + markup, {
