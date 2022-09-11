@@ -11,14 +11,12 @@ const Wrapper = styled.main`
 
 const LeftColumn = styled.div`
   flex: 1 1;
-  outline: 1px solid red;
   width: fit-content;
   order: 1;
 `;
 
 const RightColumn = styled.div`
   flex: 4 1;
-  outline: 1px solid red;
   width: fit-content;
   order: 2;
 `;
