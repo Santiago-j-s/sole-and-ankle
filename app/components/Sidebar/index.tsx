@@ -1,6 +1,6 @@
 import { NavLink, useLoaderData } from "@remix-run/react";
 import styled from "styled-components";
-import type { loader } from "~/routes/$sales/shoes.$shoetype";
+import type { loader } from "~/routes/sales/shoes.$shoetype";
 
 const Wrapper = styled.aside`
   display: flex;
