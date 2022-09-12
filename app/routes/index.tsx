@@ -1,9 +1,5 @@
-import { Outlet } from "@remix-run/react";
+import { redirect } from "@remix-run/node";
 
-export default function Index() {
-  return (
-    <div>
-      <Outlet />
-    </div>
-  );
+export function loader() {
+  return redirect("/sales/shoes/lifestyle", 307);
 }
