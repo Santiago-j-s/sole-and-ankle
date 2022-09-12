@@ -5,6 +5,8 @@ import styled from "styled-components";
 const Wrapper = styled.nav`
   font-size: ${14 / 16}rem;
   font-weight: var(--font-weight-normal);
+  line-height: 32px;
+
   color: var(--gray-700);
 
   height: 42px;

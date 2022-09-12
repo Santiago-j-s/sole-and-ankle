@@ -1,4 +1,5 @@
-import { useLoaderData, useMatches } from "@remix-run/react";
+import { Form, useLoaderData, useMatches, useSubmit } from "@remix-run/react";
+import type { FormEvent } from "react";
 import styled from "styled-components";
 import BreadCrumbs, { Crumb } from "~/components/BreadCrumbs";
 import ShoeGrid from "~/components/ShoeGrid";
@@ -50,11 +51,24 @@ const MainContent: React.FC = () => {
 
   const { type } = useLoaderData<typeof loader>();
 
+  const submit = useSubmit();
+
+  const handleChange = (event: FormEvent<HTMLFormElement>) => {
+    submit(event.currentTarget);
+  };
+
   return (
     <Wrapper>
       <RightColumn>
         <Header>
           <HeaderText>{type?.text ?? ""}</HeaderText>
+          <Form action="." method="get" onChange={handleChange}>
+            Sort{" "}
+            <select name="sort">
+              <option value="newest-releases">Newest Releases</option>
+              <option value="price">Price</option>
+            </select>
+          </Form>
         </Header>
         <ShoeGrid />
       </RightColumn>
