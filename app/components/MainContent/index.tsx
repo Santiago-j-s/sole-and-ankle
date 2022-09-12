@@ -1,8 +1,9 @@
-import { useMatches } from "@remix-run/react";
+import { useLoaderData, useMatches } from "@remix-run/react";
 import styled from "styled-components";
 import BreadCrumbs, { Crumb } from "~/components/BreadCrumbs";
 import ShoeGrid from "~/components/ShoeGrid";
 import Sidebar from "~/components/Sidebar";
+import type { loader } from "~/routes/sales/shoes.$shoetype";
 
 const Wrapper = styled.main`
   display: flex;
@@ -21,6 +22,24 @@ const RightColumn = styled.div`
   order: 2;
 `;
 
+const Header = styled.header`
+  height: 42px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+`;
+
+const HeaderText = styled.span`
+  position: relative;
+  margin-top: -8px;
+
+  font-size: ${24 / 16}rem;
+  font-weight: var(--font-weight-normal);
+  line-height: ${24 / 16}rem;
+`;
+
 const MainContent: React.FC = () => {
   const matches = useMatches();
 
@@ -29,10 +48,14 @@ const MainContent: React.FC = () => {
     text: match.handle?.breadcrumb,
   }));
 
+  const { type } = useLoaderData<typeof loader>();
+
   return (
     <Wrapper>
       <RightColumn>
-        <header>Running</header>
+        <Header>
+          <HeaderText>{type?.text ?? ""}</HeaderText>
+        </Header>
         <ShoeGrid />
       </RightColumn>
       <LeftColumn>
