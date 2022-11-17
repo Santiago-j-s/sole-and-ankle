@@ -30,11 +30,13 @@ const Header = styled.header`
 
   align-items: center;
   justify-content: space-between;
+
+  margin-bottom: ${24 / 16}rem;
 `;
 
 const HeaderText = styled.span`
   position: relative;
-  margin-top: -8px;
+  margin-top: ${-8 / 16}rem;
 
   font-size: ${24 / 16}rem;
   font-weight: var(--font-weight-normal);

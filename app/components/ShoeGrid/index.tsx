@@ -1,16 +1,12 @@
 import { useLoaderData } from "@remix-run/react";
 import styled from "styled-components";
 import type { loader } from "~/routes/sales/shoes.$shoetype";
+import { Shoe } from "../Shoe";
 
 const Wrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 32px;
-`;
-
-const Shoe = styled.pre`
-  outline: 1px solid black;
-  width: 340px;
 `;
 
 const ShoeGrid: React.FC = () => {
@@ -19,7 +15,7 @@ const ShoeGrid: React.FC = () => {
   return (
     <Wrapper>
       {shoes.map((shoe) => (
-        <Shoe key={shoe.slug}>{JSON.stringify(shoe, null, 2)}</Shoe>
+        <Shoe key={shoe.name} {...shoe} />
       ))}
     </Wrapper>
   );
