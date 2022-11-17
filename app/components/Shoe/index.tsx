@@ -39,6 +39,7 @@ const BasicInfo = styled.p`
   display: flex;
   justify-content: space-between;
   color: var(--gray-900);
+  margin-top: ${14 / 16}rem;
 `;
 
 const ExtraInfo = styled.p`
