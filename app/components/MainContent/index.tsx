@@ -2,6 +2,7 @@ import { Form, useLoaderData, useMatches, useSubmit } from "@remix-run/react";
 import type { FormEvent } from "react";
 import styled from "styled-components";
 import BreadCrumbs, { Crumb } from "~/components/BreadCrumbs";
+import Select from "~/components/Select";
 import ShoeGrid from "~/components/ShoeGrid";
 import Sidebar from "~/components/Sidebar";
 import type { loader } from "~/routes/sales/shoes.$shoetype";
@@ -43,6 +44,15 @@ const HeaderText = styled.span`
   line-height: ${24 / 16}rem;
 `;
 
+const SortText = styled.span`
+  font-size: ${16 / 16}rem;
+  font-weight: var(--font-weight-normal);
+
+  margin-right: ${16 / 16}rem;
+
+  color: var(--gray-700);
+`;
+
 const MainContent: React.FC = () => {
   const matches = useMatches();
 
@@ -65,11 +75,11 @@ const MainContent: React.FC = () => {
         <Header>
           <HeaderText>{type?.text ?? ""}</HeaderText>
           <Form action="." method="get" onChange={handleChange}>
-            Sort{" "}
-            <select name="sort">
+            <SortText>Sort</SortText>
+            <Select name="sort">
               <option value="newest-releases">Newest Releases</option>
               <option value="price">Price</option>
-            </select>
+            </Select>
           </Form>
         </Header>
         <ShoeGrid />
