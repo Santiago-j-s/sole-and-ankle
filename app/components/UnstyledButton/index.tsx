@@ -29,6 +29,7 @@ export default styled(Button)`
   text-align: left;
   font: inherit;
   color: inherit;
+  line-height: 0;
 
   &:focus {
     outline-offset: 2px;
