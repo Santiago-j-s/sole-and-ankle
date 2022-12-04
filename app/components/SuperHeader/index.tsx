@@ -1,9 +1,10 @@
 import styled from "styled-components";
-import Search from "~/components/Search";
+import { QUERIES } from "~/breakpoints";
 import Icon from "~/components/Icon";
+import Search from "~/components/Search";
 import UnstyledButton from "~/components/UnstyledButton";
 
-const Wrapper = styled.div`
+const DesktopWrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 24px;
@@ -17,6 +18,10 @@ const Wrapper = styled.div`
 
   padding-left: 32px;
   padding-right: 32px;
+
+  @media (${QUERIES.tabletAndDown}) {
+    display: none;
+  }
 `;
 
 const MarkettingText = styled.span`
@@ -38,9 +43,9 @@ const ShoppingBagIcon = styled(Icon)`
   color: var(--gray-300);
 `;
 
-const SuperHeader: React.FC = () => {
+const DesktopSuperHeader: React.FC = () => {
   return (
-    <Wrapper>
+    <DesktopWrapper>
       <MarkettingText>
         Free shipping on domestic orders over $75!
       </MarkettingText>
@@ -49,7 +54,26 @@ const SuperHeader: React.FC = () => {
       <UnstyledButton height="24px">
         <ShoppingBagIcon icon="ShoppingBag" />
       </UnstyledButton>
-    </Wrapper>
+    </DesktopWrapper>
+  );
+};
+
+const MobileSuperHeader = styled.div`
+  height: 4px;
+  background-color: var(--gray-900);
+
+  display: none;
+  @media (${QUERIES.tabletAndDown}) {
+    display: block;
+  }
+`;
+
+const SuperHeader: React.FC = () => {
+  return (
+    <>
+      <MobileSuperHeader />
+      <DesktopSuperHeader />
+    </>
   );
 };
 
