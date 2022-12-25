@@ -1,10 +1,10 @@
 import { NavLink, useLoaderData } from "@remix-run/react";
+import React from "react";
 import styled from "styled-components";
 import { QUERIES } from "~/breakpoints";
 import type { loader } from "~/root";
-import MainHeader from ".";
 
-const WrapperNavLinksNavbar = styled.ul<{ mainHeaderClassName: string }>`
+const WrapperNavLinksNavbar = styled.ul`
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -34,24 +34,22 @@ interface WrapperNavLinksProps {
   children: React.ReactNode;
 }
 
+const WrapperNavLinksComponentMap = {
+  navbar: WrapperNavLinksNavbar,
+  drawer: WrapperNavLinksDrawer,
+} as const;
+
 const WrapperNavLinks: React.FC<WrapperNavLinksProps> = ({
   variant,
   children,
 }) => {
-  switch (variant) {
-    case "navbar":
-      return (
-        <WrapperNavLinksNavbar mainHeaderClassName={MainHeader.toString()}>
-          {children}
-        </WrapperNavLinksNavbar>
-      );
+  const WrapperNavLinksComponent = WrapperNavLinksComponentMap[variant];
 
-    case "drawer":
-      return <WrapperNavLinksDrawer>{children}</WrapperNavLinksDrawer>;
-
-    default:
-      throw new Error("Invalid variant");
+  if (!WrapperNavLinksComponent) {
+    throw new Error("Invalid variant");
   }
+
+  return <WrapperNavLinksComponent>{children}</WrapperNavLinksComponent>;
 };
 
 const Link = styled(NavLink)`
