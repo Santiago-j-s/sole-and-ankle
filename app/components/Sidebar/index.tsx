@@ -21,11 +21,15 @@ const SidebarLink = styled(NavLink)`
   }
 `;
 
-const Sidebar: React.FC = () => {
+interface SidebarProps {
+  className?: string;
+}
+
+const Sidebar: React.FC<SidebarProps> = ({ className }) => {
   const { shoetypes } = useLoaderData<typeof loader>();
 
   return (
-    <Wrapper>
+    <Wrapper className={className}>
       {shoetypes.map((shoetype) => (
         <SidebarLink key={shoetype.slug} to={`../shoes/${shoetype.slug}`}>
           {shoetype.text}

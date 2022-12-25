@@ -1,21 +1,34 @@
 import { Form, useLoaderData, useMatches, useSubmit } from "@remix-run/react";
 import type { FormEvent } from "react";
 import styled from "styled-components";
+import { QUERIES } from "~/breakpoints";
 import BreadCrumbs, { Crumb } from "~/components/BreadCrumbs";
 import Select from "~/components/Select";
 import ShoeGrid from "~/components/ShoeGrid";
 import Sidebar from "~/components/Sidebar";
 import type { loader } from "~/routes/sales/shoes.$shoetype";
 
+const LeftColumnSidebar = styled(Sidebar)``;
+
 const Wrapper = styled.main`
   display: flex;
   padding: 64px var(--site-padding) 0 var(--site-padding);
+
+  @media (${QUERIES.tabletAndDown}) {
+    flex-direction: column;
+  }
 `;
 
 const LeftColumn = styled.div`
   flex: 1 1;
   width: fit-content;
   order: 1;
+
+  ${LeftColumnSidebar} {
+    @media (${QUERIES.tabletAndDown}) {
+      display: none;
+    }
+  }
 `;
 
 const RightColumn = styled.div`
@@ -53,6 +66,12 @@ const SortText = styled.span`
   color: var(--gray-700);
 `;
 
+const SelectWrapper = styled(Form)`
+  @media (${QUERIES.mobileAndDown}) {
+    display: none;
+  }
+`;
+
 const MainContent: React.FC = () => {
   const matches = useMatches();
 
@@ -74,13 +93,13 @@ const MainContent: React.FC = () => {
       <RightColumn>
         <Header>
           <HeaderText>{type?.text ?? ""}</HeaderText>
-          <Form action="." method="get" onChange={handleChange}>
+          <SelectWrapper action="." method="get" onChange={handleChange}>
             <SortText>Sort</SortText>
             <Select name="sort">
               <option value="newest-releases">Newest Releases</option>
               <option value="price">Price</option>
             </Select>
-          </Form>
+          </SelectWrapper>
         </Header>
         <ShoeGrid />
       </RightColumn>
@@ -92,7 +111,7 @@ const MainContent: React.FC = () => {
             </Crumb>
           ))}
         </BreadCrumbs>
-        <Sidebar />
+        <LeftColumnSidebar />
       </LeftColumn>
     </Wrapper>
   );
