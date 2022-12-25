@@ -29,7 +29,7 @@ export const Wrapper = styled.div`
     left: var(--site-padding);
   }
 
-  @media (${QUERIES.laptopAndDown}) {
+  @media (${QUERIES.laptopAndSmaller}) {
     justify-content: flex-start;
 
     ${WrapperLogo} {
@@ -44,7 +44,7 @@ export const Wrapper = styled.div`
  * on desktop the navigation links are shown and the mobile buttons are hidden
  * the mobile buttons are a hamburger icon to open the drawer and a shopping bag icon
  */
-const MainHeader: React.FC<{ className: string }> = ({ className }) => {
+const MainHeader: React.FC<{ className?: string }> = ({ className }) => {
   return (
     <DialogRoot>
       <Wrapper className={className}>

@@ -11,7 +11,7 @@ const WrapperNavLinksNavbar = styled.ul`
 
   gap: ${48 / 16}rem;
 
-  @media (${QUERIES.tabletAndDown}) {
+  @media (${QUERIES.tabletAndSmaller}) {
     display: none;
   }
 `;

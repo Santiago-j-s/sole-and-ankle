@@ -19,7 +19,7 @@ const DesktopWrapper = styled.div`
   padding-left: 32px;
   padding-right: 32px;
 
-  @media (${QUERIES.tabletAndDown}) {
+  @media (${QUERIES.tabletAndSmaller}) {
     display: none;
   }
 `;
@@ -63,7 +63,7 @@ const MobileSuperHeader = styled.div`
   background-color: var(--gray-900);
 
   display: none;
-  @media (${QUERIES.tabletAndDown}) {
+  @media (${QUERIES.tabletAndSmaller}) {
     display: block;
   }
 `;

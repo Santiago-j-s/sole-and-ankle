@@ -14,7 +14,7 @@ const Wrapper = styled.main`
   display: flex;
   padding: 64px var(--site-padding) 0 var(--site-padding);
 
-  @media (${QUERIES.tabletAndDown}) {
+  @media (${QUERIES.tabletAndSmaller}) {
     flex-direction: column;
   }
 `;
@@ -25,7 +25,7 @@ const LeftColumn = styled.div`
   order: 1;
 
   ${LeftColumnSidebar} {
-    @media (${QUERIES.tabletAndDown}) {
+    @media (${QUERIES.tabletAndSmaller}) {
       display: none;
     }
   }
@@ -67,7 +67,7 @@ const SortText = styled.span`
 `;
 
 const SelectWrapper = styled(Form)`
-  @media (${QUERIES.mobileAndDown}) {
+  @media (${QUERIES.phoneAndSmaller}) {
     display: none;
   }
 `;

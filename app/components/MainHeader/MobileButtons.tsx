@@ -10,7 +10,7 @@ const MobileButtonsWrapper = styled.ul`
   margin-left: auto;
 
   display: none;
-  @media (${QUERIES.tabletAndDown}) {
+  @media (${QUERIES.tabletAndSmaller}) {
     display: flex;
   }
 `;

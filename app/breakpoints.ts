@@ -6,13 +6,13 @@
  */
 
 export const BREAKPOINTS = {
-  mobileMax: "37.5rem",
-  tabletMax: "59.375rem",
-  laptopMax: "81.25rem",
+  phoneMax: 600,
+  tabletMax: 950,
+  laptopMax: 1300,
 } as const;
 
 export const QUERIES = {
-  mobileAndDown: `(max-width: ${BREAKPOINTS.mobileMax})`,
-  tabletAndDown: `(max-width: ${BREAKPOINTS.tabletMax})`,
-  laptopAndDown: `(max-width: ${BREAKPOINTS.laptopMax})`,
+  phoneAndSmaller: `(max-width: ${BREAKPOINTS.phoneMax / 16}rem)`,
+  tabletAndSmaller: `(max-width: ${BREAKPOINTS.tabletMax / 16}rem)`,
+  laptopAndSmaller: `(max-width: ${BREAKPOINTS.laptopMax / 16}rem)`,
 } as const;
