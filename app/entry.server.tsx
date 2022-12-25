@@ -32,9 +32,15 @@ export default function handleRequest(
     </StyleSheetManager>
   );
 
-  const { styles } = getStyles(sheet);
+  try {
+    const { styles } = getStyles(sheet);
 
-  markup = markup.replace("</head>", `<style>${styles}</style></head>`);
+    markup = markup.replace("</head>", `<style>${styles}</style></head>`);
+  } catch (error) {
+    console.log(error);
+  } finally {
+    sheet.seal();
+  }
 
   responseHeaders.set("Content-Type", "text/html");
 
