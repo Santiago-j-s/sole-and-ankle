@@ -1,9 +1,14 @@
-import { NavLink, useLoaderData } from "@remix-run/react";
+import { Root as DialogRoot } from "@radix-ui/react-dialog";
 import styled from "styled-components";
+import { QUERIES } from "~/breakpoints";
 import Logo from "~/components/Logo";
-import type { loader } from "~/root";
+import Drawer from "./Drawer";
+import { MobileButtons } from "./MobileButtons";
+import NavLinks from "./NavLinks";
 
-const Wrapper = styled.div`
+const WrapperLogo = styled(Logo)``;
+
+export const Wrapper = styled.div`
   display: flex;
 
   position: relative;
@@ -12,58 +17,46 @@ const Wrapper = styled.div`
 
   justify-content: center;
   align-items: center;
+  gap: ${48 / 16}rem;
 
   padding-left: var(--site-padding);
   padding-right: var(--site-padding);
 
   border-bottom: 1px solid var(--gray-300);
-`;
 
-const HeaderLogo = styled(Logo)`
-  position: absolute;
-  left: var(--site-padding);
-`;
-
-const NavLinks = styled.ul`
-  display: flex;
-  margin-left: auto;
-  margin-right: auto;
-  gap: 48px;
-`;
-
-const Link = styled(NavLink)`
-  color: var(--gray-900);
-  font-size: ${18 / 16}rem;
-  font-weight: var(--font-weight-medium);
-  text-decoration: none;
-  text-transform: uppercase;
-
-  &.active {
-    color: var(--secondary);
+  ${WrapperLogo} {
+    position: absolute;
+    left: var(--site-padding);
   }
 
-  &:hover {
-    text-decoration: underline;
+  @media (${QUERIES.laptopAndDown}) {
+    justify-content: flex-start;
+
+    ${WrapperLogo} {
+      position: revert;
+    }
   }
 `;
 
-const MainHeader: React.FC = () => {
-  const { sales } = useLoaderData<typeof loader>();
-
+/**
+ * Main header with the logo, the navigation links and the mobile buttons
+ * on mobile the navigation links are hidden and the mobile buttons are shown
+ * on desktop the navigation links are shown and the mobile buttons are hidden
+ * the mobile buttons are a hamburger icon to open the drawer and a shopping bag icon
+ */
+const MainHeader: React.FC<{ className: string }> = ({ className }) => {
   return (
-    <Wrapper>
-      <HeaderLogo>Sole&Ankle</HeaderLogo>
-      <NavLinks>
-        {sales.map((sale) => (
-          <li key={sale.slug}>
-            <Link to={sale.slug} prefetch="intent">
-              {sale.text}
-            </Link>
-          </li>
-        ))}
-      </NavLinks>
-    </Wrapper>
+    <DialogRoot>
+      <Wrapper className={className}>
+        <WrapperLogo>Sole&Ankle</WrapperLogo>
+        <NavLinks variant="navbar" />
+        <MobileButtons />
+        <Drawer />
+      </Wrapper>
+    </DialogRoot>
   );
 };
 
-export default MainHeader;
+const StyledMainHeader = styled(MainHeader)``;
+
+export default StyledMainHeader;
