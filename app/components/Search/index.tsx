@@ -26,6 +26,10 @@ const SearchInput = styled.input`
 
   padding-left: 24px;
 
+  &:focus {
+    outline: none;
+  }
+
   &::placeholder {
     color: var(--gray-500);
   }
