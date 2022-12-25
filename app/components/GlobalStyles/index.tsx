@@ -60,6 +60,10 @@ table {
 html, body {
   height: 100%;
 }
+
+&:focus-visible {
+	outline: 2px solid var(--gray-500);
+}
 `;
 
 export default GlobalStyles;
