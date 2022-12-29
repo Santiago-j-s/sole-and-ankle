@@ -4,14 +4,17 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
+  min-width: ${340 / 16}rem;
+  flex: 1;
+`;
+
+const ImageWrapper = styled.div`
+  border-radius: ${16 / 16}rem ${16 / 16}rem ${4 / 16}rem ${4 / 16}rem;
+  background-color: #f6f5f6;
 `;
 
 const Image = styled.img`
-  width: ${340 / 16}rem;
-  height: ${312 / 16}rem;
-  border-radius: ${16 / 16}rem ${16 / 16}rem ${4 / 16}rem ${4 / 16}rem;
-  object-fit: contain;
-  background-color: #f6f5f6;
+  width: 100%;
 `;
 
 const NewLabel = styled.span<{ type: "new" | "sale" }>`
@@ -89,7 +92,9 @@ export const Shoe: React.FC<ShoeProps> = ({
 
   return (
     <Wrapper>
-      <Image width="340" height="312" src={imageSrc} alt={name} />
+      <ImageWrapper>
+        <Image src={imageSrc} alt={name} />
+      </ImageWrapper>
       {justReleased && <NewLabel type="new">Just Released!</NewLabel>}
       {onSale && <NewLabel type="sale">Sale</NewLabel>}
       <BasicInfo>

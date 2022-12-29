@@ -47,7 +47,6 @@ const StyledIcon = styled(Icon)`
 
 const Wrapper = styled.div`
   display: inline-block;
-  margin-right: ${7 / 16}rem;
 
   position: relative;
 
