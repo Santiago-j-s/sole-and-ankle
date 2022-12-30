@@ -5,13 +5,16 @@ import Icon from "../Icon";
 import UnstyledButton from "../UnstyledButton";
 
 const MobileButtonsWrapper = styled.ul`
-  gap: 24px;
-
+  gap: 32px;
   margin-left: auto;
 
   display: none;
   @media (${QUERIES.tabletAndSmaller}) {
     display: flex;
+  }
+
+  @media (${QUERIES.phoneAndSmaller}) {
+    gap: 16px;
   }
 `;
 
