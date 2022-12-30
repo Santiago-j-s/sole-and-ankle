@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import { QUERIES } from "~/breakpoints";
 
 const GlobalVariables = createGlobalStyle`
  :root {
@@ -18,6 +19,10 @@ const GlobalVariables = createGlobalStyle`
   --font-weight-bold: 800;
 
   --site-padding: 32px;
+
+  @media ${QUERIES.phoneAndSmaller} {
+    --site-padding: 16px;
+  }
  }
 `;
 
