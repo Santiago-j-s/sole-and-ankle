@@ -42,10 +42,14 @@ const Header = styled.header`
 
   display: flex;
 
-  align-items: center;
+  align-items: baseline;
   justify-content: space-between;
 
   margin-bottom: ${24 / 16}rem;
+
+  @media ${QUERIES.tabletAndSmaller} {
+    align-items: flex-end;
+  }
 `;
 
 const HeaderText = styled.span`
@@ -67,6 +71,7 @@ const SortText = styled.span`
 `;
 
 const SelectWrapper = styled(Form)`
+  align-items: baseline;
   @media (${QUERIES.phoneAndSmaller}) {
     display: none;
   }
