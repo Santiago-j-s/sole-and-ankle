@@ -27,14 +27,14 @@ export const MobileButtons: React.FC = () => {
   return (
     <MobileButtonsWrapper>
       <UnstyledButton>
-        <ButtonIcon icon="ShoppingBag" />
+        <ButtonIcon icon="ShoppingBag" aria-label="Shopping Bag" />
       </UnstyledButton>
       <UnstyledButton>
-        <ButtonIcon icon="Search" />
+        <ButtonIcon icon="Search" aria-label="Search" />
       </UnstyledButton>
       <DialogTrigger asChild>
         <UnstyledButton>
-          <ButtonIcon icon="Menu" />
+          <ButtonIcon icon="Menu" aria-label="Menu" />
         </UnstyledButton>
       </DialogTrigger>
     </MobileButtonsWrapper>
