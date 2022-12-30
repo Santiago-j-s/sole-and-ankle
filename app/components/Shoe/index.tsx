@@ -11,6 +11,7 @@ const Wrapper = styled.div`
 const ImageWrapper = styled.div`
   border-radius: ${16 / 16}rem ${16 / 16}rem ${4 / 16}rem ${4 / 16}rem;
   background-color: #f6f5f6;
+  overflow: hidden;
 `;
 
 const Image = styled.img`
