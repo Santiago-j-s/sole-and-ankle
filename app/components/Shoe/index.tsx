@@ -95,7 +95,13 @@ export const Shoe: React.FC<ShoeProps> = ({
   return (
     <Wrapper>
       <ImageWrapper>
-        <Image src={imageSrc} alt={name} />
+        <Image
+          width="100%"
+          height="312"
+          src={imageSrc}
+          alt={name}
+          loading="lazy"
+        />
       </ImageWrapper>
       {justReleased && <NewLabel type="new">Just Released!</NewLabel>}
       {onSale && <NewLabel type="sale">Sale</NewLabel>}
