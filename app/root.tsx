@@ -8,7 +8,7 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 import type { PropsWithChildren } from "react";
-import { useLayoutEffect } from "react";
+import { useEffect } from "react";
 import GlobalStyles from "~/components/GlobalStyles";
 import GlobalVariables from "~/components/GlobalVariables";
 import MainLayout from "~/components/MainLayout";
@@ -45,7 +45,7 @@ export function loader() {
  * blends in with the background color of the page.
  */
 function useAdjustBackgroundColor() {
-  useLayoutEffect(() => {
+  useEffect(() => {
     const htmlElement = document.documentElement;
 
     const handleScroll = () => {
