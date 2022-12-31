@@ -6,6 +6,8 @@ import UnstyledButton from "../UnstyledButton";
 import NavLinks from "./NavLinks";
 
 export const Content = styled(Dialog.Content)`
+  --padding: 32px;
+
   position: absolute;
   right: 0;
   top: 0;
@@ -13,7 +15,7 @@ export const Content = styled(Dialog.Content)`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 
   gap: 48px;
 
@@ -30,11 +32,15 @@ const CloseButton = styled(UnstyledButton)`
   right: 24px;
 `;
 
+const WrapperNavLinks = styled(NavLinks)`
+  padding: var(--padding);
+`;
+
 const Footer = styled.div`
   display: flex;
   flex-direction: column;
   gap: ${14 / 16}rem;
-  margin: 32px;
+  margin: var(--padding);
   margin-top: auto;
 
   a {
@@ -89,7 +95,7 @@ const Drawer: React.FC<{ className?: string }> = ({ className }) => {
             <ButtonIcon icon="X" />
           </CloseButton>
         </Dialog.Close>
-        <NavLinks variant="drawer" />
+        <WrapperNavLinks variant="drawer" />
         <Footer>
           <Link to="/terms">Terms and Conditions</Link>
           <Link to="/privacy">Privacy Policy</Link>

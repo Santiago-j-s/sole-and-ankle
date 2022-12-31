@@ -31,6 +31,7 @@ const WrapperNavLinksDrawer = styled.ul`
 
 interface WrapperNavLinksProps {
   variant: "navbar" | "drawer";
+  className?: string;
   children: React.ReactNode;
 }
 
@@ -41,6 +42,7 @@ const WrapperNavLinksComponentMap = {
 
 const WrapperNavLinks: React.FC<WrapperNavLinksProps> = ({
   variant,
+  className,
   children,
 }) => {
   const WrapperNavLinksComponent = WrapperNavLinksComponentMap[variant];
@@ -49,7 +51,11 @@ const WrapperNavLinks: React.FC<WrapperNavLinksProps> = ({
     throw new Error("Invalid variant");
   }
 
-  return <WrapperNavLinksComponent>{children}</WrapperNavLinksComponent>;
+  return (
+    <WrapperNavLinksComponent className={className}>
+      {children}
+    </WrapperNavLinksComponent>
+  );
 };
 
 const Link = styled(NavLink)`
@@ -74,6 +80,7 @@ const Link = styled(NavLink)`
 
 interface NavLinksProps {
   variant: "navbar" | "drawer";
+  className?: string;
 }
 
 /**
@@ -83,11 +90,11 @@ interface NavLinksProps {
  * in desktop mode the links should be rendered horizontally
  * in mobile mode the links should be rendered vertically
  */
-const NavLinks = ({ variant }: NavLinksProps) => {
+const NavLinks = ({ variant, className }: NavLinksProps) => {
   const { sales } = useLoaderData<typeof loader>();
 
   return (
-    <WrapperNavLinks variant={variant}>
+    <WrapperNavLinks variant={variant} className={className}>
       {sales.map((sale) => (
         <li key={sale.slug}>
           <Link to={sale.slug} prefetch="intent">
