@@ -80,6 +80,14 @@ interface ShoeProps {
   numOfColors: number;
 }
 
+function formatPrice(price: number | null) {
+  if (price === null) {
+    return "";
+  }
+
+  return `$${price / 100}`;
+}
+
 export const Shoe: React.FC<ShoeProps> = ({
   name,
   imageSrc,
@@ -91,6 +99,12 @@ export const Shoe: React.FC<ShoeProps> = ({
   const oneHour = 1000 * 60 * 60 * 24;
   const justReleased = new Date().getTime() - releaseDate < oneHour;
   const onSale = salePrice !== null;
+
+  const formattedPrice = formatPrice(price);
+  const formattedSalePrice = formatPrice(salePrice);
+
+  const colorText =
+    numOfColors === 1 ? `${numOfColors} Color` : `${numOfColors} Colors`;
 
   return (
     <Wrapper>
@@ -107,13 +121,11 @@ export const Shoe: React.FC<ShoeProps> = ({
       {onSale && <NewLabel type="sale">Sale</NewLabel>}
       <BasicInfo>
         <span>{name}</span>
-        <PriceLabel price={price} onSale={onSale} />
+        <PriceLabel price={formattedPrice} onSale={onSale} />
       </BasicInfo>
       <ExtraInfo>
-        <span>
-          {numOfColors} Color{numOfColors > 1 ? "s" : ""}
-        </span>
-        {onSale && <SalePriceLabel>${salePrice}</SalePriceLabel>}
+        <span>{colorText}</span>
+        {onSale && <SalePriceLabel>{formattedSalePrice}</SalePriceLabel>}
       </ExtraInfo>
     </Wrapper>
   );
