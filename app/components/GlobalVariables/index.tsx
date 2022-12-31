@@ -14,6 +14,9 @@ const GlobalVariables = createGlobalStyle`
   --primary: hsl(340deg, 65%, 47%);
   --secondary: hsl(240deg, 60%, 63%);
 
+  --background-color: var(--white);
+  --background-color-secondary: var(--gray-900);
+
   --font-weight-normal: 500;
   --font-weight-medium: 600;
   --font-weight-bold: 800;

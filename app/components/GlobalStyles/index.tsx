@@ -58,7 +58,8 @@ table {
 }
 
 html, body {
-  height: 100%;
+	height: 100%;
+	background-color: var(--background-color-secondary);
 }
 
 &:focus-visible {

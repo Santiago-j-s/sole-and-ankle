@@ -8,6 +8,7 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 import type { PropsWithChildren } from "react";
+import { useLayoutEffect } from "react";
 import GlobalStyles from "~/components/GlobalStyles";
 import GlobalVariables from "~/components/GlobalVariables";
 import MainLayout from "~/components/MainLayout";
@@ -32,7 +33,38 @@ export function loader() {
   return json({ sales });
 }
 
+/**
+ * This is a custom hook that adjusts the background color of the document
+ * element based on the scroll position.
+ *
+ * This is done to fix overscrolling (scrolling past the top or bottom of the
+ * page). When overscrolling, the background color of the
+ * document element is visible.
+ *
+ * This hook ensures that the background color of the document element
+ * blends in with the background color of the page.
+ */
+function useAdjustBackgroundColor() {
+  useLayoutEffect(() => {
+    const htmlElement = document.documentElement;
+
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        htmlElement.style.backgroundColor = "var(--background-color)";
+      } else {
+        htmlElement.style.backgroundColor = "var(--background-color-secondary)";
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+}
+
 function Document({ children }: PropsWithChildren<{}>) {
+  useAdjustBackgroundColor();
+
   return (
     <html lang="en">
       <head>

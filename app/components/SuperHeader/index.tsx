@@ -14,7 +14,7 @@ const DesktopWrapper = styled.div`
   font-size: ${14 / 16 + "rem"};
   color: var(--gray-300);
 
-  background-color: var(--gray-900);
+  background-color: var(--background-color-secondary);
 
   padding-left: 32px;
   padding-right: 32px;
