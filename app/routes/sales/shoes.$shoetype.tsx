@@ -14,8 +14,12 @@ function sortByReleaseDate(shoe1: Shoe, shoe2: Shoe) {
 }
 
 function sortByPrice(shoe1: Shoe, shoe2: Shoe) {
-  if (shoe1.price < shoe2.price) return -1;
-  if (shoe1.price > shoe2.price) return 1;
+  const shoe1Price = shoe1.salePrice || shoe1.price;
+  const shoe2Price = shoe2.salePrice || shoe2.price;
+
+  if (shoe1Price < shoe2Price) return -1;
+  if (shoe1Price > shoe2Price) return 1;
+
   return 0;
 }
 
