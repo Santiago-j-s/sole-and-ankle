@@ -4,8 +4,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
-  min-width: ${340 / 16}rem;
-  flex: 1;
+  flex: 1 0 300px;
 `;
 
 const ImageWrapper = styled.div`
@@ -16,6 +15,8 @@ const ImageWrapper = styled.div`
 
 const Image = styled.img`
   width: 100%;
+  height: 312px;
+  object-fit: contain;
 `;
 
 const NewLabel = styled.span<{ type: "new" | "sale" }>`
