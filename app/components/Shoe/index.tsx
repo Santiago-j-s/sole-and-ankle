@@ -19,13 +19,12 @@ const Image = styled.img`
   object-fit: contain;
 `;
 
-const NewLabel = styled.span<{ type: "new" | "sale" }>`
+const Flag = styled.span`
   position: absolute;
   top: ${16 / 16}rem;
   right: ${-4 / 16}rem;
 
-  background-color: ${(props) =>
-    props.type === "new" ? "var(--secondary)" : "var(--primary)"};
+  background-color: var(--sale-color);
   color: var(--white);
 
   padding: ${7 / 16}rem ${9 / 16}rem;
@@ -34,6 +33,14 @@ const NewLabel = styled.span<{ type: "new" | "sale" }>`
   font-size: ${14 / 16}rem;
 
   border-radius: ${2 / 16}rem;
+`;
+
+const SaleFlag = styled(Flag)`
+  --sale-color: var(--primary);
+`;
+
+const NewFlag = styled(Flag)`
+  --sale-color: var(--secondary);
 `;
 
 const SalePriceLabel = styled.span`
@@ -58,7 +65,7 @@ const OldPrice = styled.s`
 `;
 
 interface ShoePriceProps {
-  price: number;
+  price: string;
   onSale: boolean;
 }
 
@@ -96,9 +103,13 @@ export const Shoe: React.FC<ShoeProps> = ({
   numOfColors,
   releaseDate,
 }) => {
-  const oneHour = 1000 * 60 * 60 * 24;
-  const justReleased = new Date().getTime() - releaseDate < oneHour;
+  const thirtyDays = 1000 * 60 * 60 * 24 * 30;
+  const justReleased = new Date().getTime() - releaseDate < thirtyDays;
+
   const onSale = salePrice !== null;
+
+  const justReleasedVariant = justReleased ? "just-released" : "default";
+  const variant = onSale ? "on-sale" : justReleasedVariant;
 
   const formattedPrice = formatPrice(price);
   const formattedSalePrice = formatPrice(salePrice);
@@ -117,8 +128,8 @@ export const Shoe: React.FC<ShoeProps> = ({
           loading="lazy"
         />
       </ImageWrapper>
-      {justReleased && <NewLabel type="new">Just Released!</NewLabel>}
-      {onSale && <NewLabel type="sale">Sale</NewLabel>}
+      {variant === "just-released" && <NewFlag>Just Released!</NewFlag>}
+      {variant === "on-sale" && <SaleFlag>Sale</SaleFlag>}
       <BasicInfo>
         <span>{name}</span>
         <PriceLabel price={formattedPrice} onSale={onSale} />
