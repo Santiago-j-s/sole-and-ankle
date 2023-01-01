@@ -26,8 +26,8 @@ export const Content = styled(Dialog.Content)`
 
 const CloseButton = styled(UnstyledButton)`
   position: absolute;
-  top: 24px;
-  right: 24px;
+  top: 26px;
+  right: 16px;
 `;
 
 const WrapperNavLinks = styled(NavLinks)`
