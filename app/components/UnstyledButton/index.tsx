@@ -1,4 +1,3 @@
-import type { PropsWithChildren } from "react";
 import React from "react";
 import type { CSSProperties } from "styled-components";
 import styled from "styled-components";
@@ -7,17 +6,22 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   display?: CSSProperties["display"];
   height?: CSSProperties["height"];
   width?: CSSProperties["width"];
+  children: React.ReactNode;
 }
 
-const Button = ({
-  children,
-  display,
-  ...delegated
-}: PropsWithChildren<ButtonProps>) => {
-  return <button {...delegated}>{children}</button>;
-};
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ children, display, ...delegated }, ref) => {
+    return (
+      <button ref={ref} {...delegated}>
+        {children}
+      </button>
+    );
+  }
+);
 
-export default styled(Button)`
+Button.displayName = "Button";
+
+const UnstyledButton = styled(Button)`
   display: ${(props) => props.display || "block"};
   width: ${(props) => props.width};
   height: ${(props) => props.height};
@@ -39,3 +43,5 @@ export default styled(Button)`
     outline: none;
   }
 `;
+
+export default UnstyledButton;
