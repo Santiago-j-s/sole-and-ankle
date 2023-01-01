@@ -30,7 +30,14 @@ export const handle = {
 };
 
 export function loader() {
-  return json({ sales });
+  return json(
+    { sales },
+    {
+      headers: {
+        "Cache-Control": "max-age=300, stale-while-revalidate=3600",
+      },
+    }
+  );
 }
 
 /**
