@@ -59,7 +59,7 @@ const CrumbLink = styled(Link)`
 
 export const Crumb: React.FC<CrumbProps> = ({ to, children, ...delegated }) => {
   return (
-    <CrumbLink to={to} {...delegated}>
+    <CrumbLink prefetch="intent" to={to} {...delegated}>
       {children}
     </CrumbLink>
   );

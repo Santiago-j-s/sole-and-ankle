@@ -53,7 +53,14 @@ export function loader({ params, request }: LoaderArgs) {
 
   const sortBy = url.searchParams.get("sort");
 
-  return json({ shoes: sort(sortBy, shoes), shoetypes, type });
+  return json(
+    { shoes: sort(sortBy, shoes), shoetypes, type },
+    {
+      headers: {
+        "Cache-Control": "max-age=300, stale-while-revalidate=3600",
+      },
+    }
+  );
 }
 
 export default function Type() {

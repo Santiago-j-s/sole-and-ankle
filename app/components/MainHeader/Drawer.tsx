@@ -95,9 +95,15 @@ const Drawer: React.FC<{ className?: string }> = ({ className }) => {
         </Dialog.Close>
         <WrapperNavLinks variant="drawer" />
         <Footer>
-          <Link to="/terms">Terms and Conditions</Link>
-          <Link to="/privacy">Privacy Policy</Link>
-          <Link to="/contact">Contact Us</Link>
+          <Link prefetch="intent" to="/terms">
+            Terms and Conditions
+          </Link>
+          <Link prefetch="intent" to="/privacy">
+            Privacy Policy
+          </Link>
+          <Link prefetch="intent" to="/contact">
+            Contact Us
+          </Link>
         </Footer>
       </Content>
     </Dialog.Portal>
