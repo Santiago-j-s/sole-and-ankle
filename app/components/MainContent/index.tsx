@@ -8,14 +8,14 @@ import ShoeGrid from "~/components/ShoeGrid";
 import Sidebar from "~/components/Sidebar";
 import type { loader } from "~/routes/sales/shoes.$shoetype";
 
-const LeftColumnSidebar = styled(Sidebar)``;
-
 const Wrapper = styled.main`
+  --top-padding: 64px;
+
   display: flex;
-  padding: 64px var(--site-padding) 0 var(--site-padding);
+  padding: var(--top-padding) var(--site-padding) 0 var(--site-padding);
 
   @media (${QUERIES.tabletAndSmaller}) {
-    flex-direction: column;
+    --top-padding: 48px;
   }
 `;
 
@@ -24,10 +24,8 @@ const LeftColumn = styled.div`
   width: fit-content;
   order: 1;
 
-  ${LeftColumnSidebar} {
-    @media (${QUERIES.tabletAndSmaller}) {
-      display: none;
-    }
+  @media (${QUERIES.tabletAndSmaller}) {
+    display: none;
   }
 `;
 
@@ -45,17 +43,19 @@ const Header = styled.header`
   align-items: baseline;
   justify-content: space-between;
 
-  margin-bottom: ${24 / 16}rem;
+  margin-bottom: ${34 / 16}rem;
 
   @media ${QUERIES.tabletAndSmaller} {
     align-items: flex-end;
   }
 `;
 
-const HeaderText = styled.span`
-  position: relative;
-  margin-top: ${-8 / 16}rem;
+const HeaderLeft = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
+const HeaderText = styled.span`
   font-size: ${24 / 16}rem;
   font-weight: var(--font-weight-normal);
   line-height: ${24 / 16}rem;
@@ -77,14 +77,39 @@ const SelectWrapper = styled(Form)`
   }
 `;
 
-const MainContent: React.FC = () => {
+function capitalize(s: string) {
+  return s.charAt(0).toUpperCase() + s.slice(1);
+}
+
+const MainContentBreadcrumbs = ({ className }: { className?: string }) => {
   const matches = useMatches();
 
   const crumbs = matches.map((match) => ({
     to: match.pathname,
-    text: match.handle?.breadcrumb,
+    text: capitalize(match.handle?.breadcrumb),
   }));
 
+  return (
+    <BreadCrumbs className={className}>
+      {crumbs.map((crumb) => (
+        <Crumb key={crumb.to} to={crumb.to}>
+          {crumb.text}
+        </Crumb>
+      ))}
+    </BreadCrumbs>
+  );
+};
+
+const TabletMainContentBreadcrumbs = styled(MainContentBreadcrumbs)`
+  display: none;
+
+  @media (${QUERIES.tabletAndSmaller}) {
+    display: block;
+    margin-bottom: ${8 / 16}rem;
+  }
+`;
+
+const MainContent: React.FC = () => {
   const { type } = useLoaderData<typeof loader>();
 
   const submit = useSubmit();
@@ -97,7 +122,10 @@ const MainContent: React.FC = () => {
     <Wrapper>
       <RightColumn>
         <Header>
-          <HeaderText>{type?.text ?? ""}</HeaderText>
+          <HeaderLeft>
+            <TabletMainContentBreadcrumbs />
+            <HeaderText>{type?.text ?? ""}</HeaderText>
+          </HeaderLeft>
           <SelectWrapper action="." method="get" onChange={handleChange}>
             <SortText>Sort</SortText>
             <Select name="sort">
@@ -109,14 +137,8 @@ const MainContent: React.FC = () => {
         <ShoeGrid />
       </RightColumn>
       <LeftColumn>
-        <BreadCrumbs>
-          {crumbs.map((crumb) => (
-            <Crumb key={crumb.to} to={crumb.to}>
-              {crumb.text}
-            </Crumb>
-          ))}
-        </BreadCrumbs>
-        <LeftColumnSidebar />
+        <MainContentBreadcrumbs />
+        <Sidebar />
       </LeftColumn>
     </Wrapper>
   );

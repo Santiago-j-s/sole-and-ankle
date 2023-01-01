@@ -1,25 +1,39 @@
 import { Link } from "@remix-run/react";
-import type { PropsWithChildren } from "react";
 import styled from "styled-components";
+import { QUERIES } from "~/breakpoints";
 
 const Wrapper = styled.nav`
   font-size: ${14 / 16}rem;
   font-weight: var(--font-weight-normal);
-  line-height: 32px;
+  line-height: 1rem;
 
   color: var(--gray-700);
 
   height: 42px;
   display: flex;
   align-items: center;
+
+  @media (${QUERIES.tabletAndSmaller}) {
+    height: 1rem;
+  }
 `;
 
-const BreadCrumbs: React.FC<PropsWithChildren<{}>> = ({ children }) => {
-  return <Wrapper>{children}</Wrapper>;
+interface BreadCrumbsProps {
+  className?: string;
+  children: React.ReactNode;
+}
+
+const BreadCrumbs: React.FC<BreadCrumbsProps> = ({
+  children,
+  ...delegated
+}) => {
+  return <Wrapper {...delegated}>{children}</Wrapper>;
 };
 
 interface CrumbProps {
   to: Parameters<typeof Link>[0]["to"];
+  className?: string;
+  children?: React.ReactNode;
 }
 
 const CrumbLink = styled(Link)`
@@ -43,11 +57,7 @@ const CrumbLink = styled(Link)`
   }
 `;
 
-export const Crumb: React.FC<PropsWithChildren<CrumbProps>> = ({
-  to,
-  children,
-  ...delegated
-}) => {
+export const Crumb: React.FC<CrumbProps> = ({ to, children, ...delegated }) => {
   return (
     <CrumbLink to={to} {...delegated}>
       {children}
