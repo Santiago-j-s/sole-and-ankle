@@ -9,11 +9,14 @@ import NavLinks from "./NavLinks";
 const WrapperLogo = styled(Logo)``;
 
 export const Wrapper = styled.div`
+  --base-height: 72px;
+  --height: var(--base-height);
+
   display: flex;
 
   position: relative;
 
-  height: 72px;
+  height: var(--height);
 
   justify-content: center;
   align-items: center;
@@ -35,6 +38,11 @@ export const Wrapper = styled.div`
     ${WrapperLogo} {
       position: revert;
     }
+  }
+
+  @media (${QUERIES.tabletAndSmaller}) {
+    // adjust for superheader height
+    --height: calc(var(--base-height) - 4px);
   }
 `;
 
