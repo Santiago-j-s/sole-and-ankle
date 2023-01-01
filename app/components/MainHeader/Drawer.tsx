@@ -17,8 +17,6 @@ export const Content = styled(Dialog.Content)`
   justify-content: center;
   align-items: flex-start;
 
-  gap: 48px;
-
   background-color: var(--gray-900);
   background: white;
 

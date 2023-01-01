@@ -26,7 +26,8 @@ const WrapperNavLinksDrawer = styled.ul`
   justify-content: center;
   align-items: flex-start;
 
-  gap: ${22 / 16}rem;
+  gap: ${19.6 / 16}rem;
+  line-height: ${21 / 16}rem;
 `;
 
 interface WrapperNavLinksProps {
